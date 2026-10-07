@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Statistics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Online Shopping Statistics</h1>
+    <p>Probability Theory course project: shopping data, statistics and probability analysis</p>
+</header>
+
+<main>
+
+    <!-- 1. SHOPPING DATA -->
+    <section class="panel">
+        <h2>1. Shopping Data</h2>
+
+        <div class="input-grid">
+            <div class="input-box">
+                <label for="ordersInput">Total Orders</label>
+                <input type="number" id="ordersInput" value="1000" min="0">
+            </div>
+
+            <div class="input-box">
+                <label for="priceInput">Average Price ($)</label>
+                <input type="number" id="priceInput" value="100" min="0">
+            </div>
+
+            <div class="input-box">
+                <label for="discountInput">Discount (%)</label>
+                <input type="number" id="discountInput" value="10" min="0" max="100">
+            </div>
+
+            <div class="input-box">
+                <label for="electronicsInput">Electronics Orders</label>
+                <input type="number" id="electronicsInput" value="300" min="0">
+            </div>
+
+            <div class="input-box">
+                <label for="clothingInput">Clothing Orders</label>
+                <input type="number" id="clothingInput" value="250" min="0">
+            </div>
+
+            <div class="input-box">
+                <label for="bothInput">Both Categories Orders</label>
+                <input type="number" id="bothInput" value="80" min="0">
+            </div>
+        </div>
+
+        <div id="validation" class="validation" hidden></div>
+    </section>
+
+
+    <!-- 2. SHOPPING FORMULAS -->
+    <section class="panel">
+        <h2>2. Shopping Formulas</h2>
+
+        <div class="formula-grid">
+
+            <div class="formula-card">
+                <h3>Revenue</h3>
+                <p class="formula">Revenue = Orders × Price × (1 − Discount / 100)</p>
+                <p class="calc" id="revenueCalc"></p>
+                <strong id="revenueFormulaValue">$0</strong>
+            </div>
+
+            <div class="formula-card">
+                <h3>AOV</h3>
+                <p class="formula">AOV = Revenue / Orders</p>
+                <p class="calc" id="aovCalc"></p>
+                <strong id="aovFormulaValue">$0</strong>
+            </div>
+
+            <div class="formula-card">
+                <h3>Discount</h3>
+                <p class="formula">Discount = Price × Discount Rate</p>
+                <p class="calc" id="discountCalc"></p>
+                <strong id="discountFormulaValue">$0</strong>
+            </div>
+
+            <div class="formula-card">
+                <h3>Customer Estimate</h3>
+                <p class="formula">Customers ≈ Orders × 0.72</p>
+                <p class="calc" id="customerCalc"></p>
+                <strong id="customerFormulaValue">0</strong>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- 3. MAIN STATISTICS -->
+    <section class="panel">
+        <h2>3. Main Statistics</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>Revenue</span>
+                <strong id="revenue">$0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Total Orders</span>
+                <strong id="orders">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Average Order Value</span>
+                <strong id="average">$0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Estimated Customers</span>
+                <strong id="customers">0</strong>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 4. CATEGORY LOGIC -->
+    <section class="panel">
+        <h2>4. Category Logic</h2>
+
+        <p class="note">
+            Electronics and Clothing overlap, so the orders are split into four
+            separate groups: Both = Electronics ∩ Clothing, Electronics Only = Electronics − Both,
+            Clothing Only = Clothing − Both, Other = Total − Electronics Only − Clothing Only − Both.
+        </p>
+
+        <div class="stats-grid">
+
+            <div class="stat-card e-card">
+                <span>Electronics Only</span>
+                <strong id="catE">0</strong>
+                <small id="catEcalc"></small>
+            </div>
+
+            <div class="stat-card c-card">
+                <span>Clothing Only</span>
+                <strong id="catC">0</strong>
+                <small id="catCcalc"></small>
+            </div>
+
+            <div class="stat-card b-card">
+                <span>Both Categories (E ∩ C)</span>
+                <strong id="catB">0</strong>
+                <small id="catBcalc"></small>
+            </div>
+
+            <div class="stat-card o-card">
+                <span>Other</span>
+                <strong id="catO">0</strong>
+                <small id="catOcalc"></small>
+            </div>
+
+        </div>
+
+        <p class="check" id="sumCheck"></p>
+    </section>
+
+
+    <!-- 5. PROBABILITY THEORY -->
+    <section class="panel">
+        <h2>5. Probability Theory</h2>
+
+        <div class="flow">
+            <span>Basic Probability</span>
+            <b>→</b>
+            <span>Complement</span>
+            <b>→</b>
+            <span>Intersection</span>
+            <b>→</b>
+            <span>Independent Events</span>
+            <b>→</b>
+            <span>Addition Rule</span>
+        </div>
+
+        <div class="probability-grid">
+
+            <!-- BASIC -->
+            <div class="probability-card">
+                <h3>
+                    <span class="tag">A</span>
+                    Basic Probability
+                </h3>
+
+                <p class="explain">
+                    Probability shows how likely an event is to happen.
+                </p>
+
+                <p class="formula">
+                    P(A) = Favourable Outcomes / Total Outcomes
+                </p>
+
+                <label for="basicCategory">Choose category</label>
+
+                <select id="basicCategory">
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="both">Both Categories</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <p class="calc" id="basicCalculation"></p>
+                <strong id="basicProbability">0%</strong>
+                <small id="basicNote"></small>
+            </div>
+
+
+            <!-- COMPLEMENT -->
+            <div class="probability-card">
+                <h3>
+                    <span class="tag">B</span>
+                    Complement Probability
+                </h3>
+
+                <p class="explain">
+                    The complement is the probability that an event does not happen.
+                </p>
+
+                <p class="formula">
+                    P(A') = 1 − P(A)
+                </p>
+
+                <label for="complementCategory">Choose category</label>
+
+                <select id="complementCategory">
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="both">Both Categories</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <p class="calc" id="complementCalculation"></p>
+                <strong id="complementProbability">0%</strong>
+            </div>
+
+
+            <!-- INDEPENDENT EVENTS -->
+            <div class="probability-card">
+                <h3>
+                    <span class="tag">C</span>
+                    Independent Events
+                </h3>
+
+                <p class="explain">
+                    Two events are independent when the occurrence of one does not affect the probability of the other.
+                </p>
+
+                <p class="formula">
+                    Independent if P(E ∩ C) = P(E) × P(C)
+                </p>
+
+                <p class="calc" id="independentCalculation"></p>
+
+                <div class="compare">
+
+                    <div>
+                        <span>Expected if independent</span>
+                        <strong id="independentProbability">0%</strong>
+                        <div class="bar">
+                            <i id="barExpected"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>Actual intersection</span>
+                        <strong id="actualIntersection">0%</strong>
+                        <div class="bar">
+                            <i id="barActual"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="conclusion" id="independentResult"></p>
+            </div>
+
+
+            <!-- ADDITION RULE -->
+            <div class="probability-card">
+                <h3>
+                    <span class="tag">D</span>
+                    Addition Rule
+                </h3>
+
+                <p class="explain">
+                    The addition rule calculates the probability that at least one of two events occurs.
+                </p>
+
+                <p class="formula">
+                    P(E ∪ C) = P(E) + P(C) − P(E ∩ C)
+                </p>
+
+                <p class="calc" id="additionCalculation"></p>
+
+                <strong id="additionProbability">0%</strong>
+
+                <small>
+                    Orders in Both Categories are inside P(E) and also inside P(C),
+                    so adding the two would count them twice. We subtract P(E ∩ C) once to fix this.
+                </small>
+            </div>
+
+        </div>
+
+
+        <!-- VENN + SUMMARY -->
+        <div class="two-col">
+
+            <div class="probability-card">
+
+                <h3>Venn Diagram</h3>
+
+                <svg id="venn"
+                     viewBox="0 0 420 260"
+                     role="img"
+                     aria-label="Venn diagram of Electronics and Clothing orders">
+
+                    <defs>
+                        <clipPath id="clipE">
+                            <circle cx="165" cy="130" r="85"/>
+                        </clipPath>
+                    </defs>
+
+                    <rect x="4"
+                          y="4"
+                          width="412"
+                          height="252"
+                          rx="10"
+                          class="v-universe"/>
+
+                    <circle cx="165"
+                            cy="130"
+                            r="85"
+                            class="v-e"/>
+
+                    <circle cx="255"
+                            cy="130"
+                            r="85"
+                            class="v-c"/>
+
+                    <circle cx="255"
+                            cy="130"
+                            r="85"
+                            class="v-both"
+                            clip-path="url(#clipE)"/>
+
+                    <text x="125" y="34" class="v-title">
+                        Electronics (E)
+                    </text>
+
+                    <text x="295" y="34" class="v-title">
+                        Clothing (C)
+                    </text>
+
+                    <text x="122" y="130" class="v-num" id="vEOnly">0</text>
+                    <text x="122" y="148" class="v-small">E only</text>
+
+                    <text x="210" y="130" class="v-num" id="vBoth">0</text>
+                    <text x="210" y="148" class="v-small">E ∩ C</text>
+
+                    <text x="298" y="130" class="v-num" id="vCOnly">0</text>
+                    <text x="298" y="148" class="v-small">C only</text>
+
+                    <text x="16"
+                          y="244"
+                          class="v-small v-other"
+                          id="vOther">
+                        Other: 0
+                    </text>
+
+                </svg>
+
+                <p class="note">
+                    Schematic diagram: circle sizes are fixed, the numbers are your current data.
+                </p>
+
+                <ul class="legend">
+                    <li>
+                        <span>P(E ∪ C): in Electronics or Clothing</span>
+                        <strong id="vUnion">0%</strong>
+                    </li>
+
+                    <li>
+                        <span>P(E ∩ C): in both circles</span>
+                        <strong id="vInter">0%</strong>
+                    </li>
+
+                    <li>
+                        <span>P(E'): outside Electronics</span>
+                        <strong id="vEc">0%</strong>
+                    </li>
+
+                    <li>
+                        <span>P(C'): outside Clothing</span>
+                        <strong id="vCc">0%</strong>
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <div class="probability-card">
+
+                    <h3>Probability Summary</h3>
+
+                    <table class="summary">
+
+                        <tr>
+                            <td>P(Electronics)</td>
+                            <td id="sumE">0%</td>
+                        </tr>
+
+                        <tr>
+                            <td>P(Clothing)</td>
+                            <td id="sumC">0%</td>
+                        </tr>
+
+                        <tr>
+                            <td>P(Both)</td>
+                            <td id="sumBoth">0%</td>
+                        </tr>
+
+                        <tr>
+                            <td>P(Other)</td>
+                            <td id="sumOther">0%</td>
+                        </tr>
+
+                        <tr>
+                            <td>P(E ∪ C)</td>
+                            <td id="sumUnion">0%</td>
+                        </tr>
+
+                        <tr class="sep">
+                            <td>P(E) × P(C)</td>
+                            <td id="sumProduct">0%</td>
+                        </tr>
+
+                        <tr>
+                            <td>P(E ∩ C)</td>
+                            <td id="sumInter">0%</td>
+                        </tr>
+
+                    </table>
+
+                    <p class="conclusion" id="sumConclusion"></p>
+
+                </div>
+
+
+                <div class="probability-card key-formulas">
+
+                    <h3>Key Formulas</h3>
+
+                    <ul>
+                        <li>P(A) = Favorable Outcomes / Total Outcomes</li>
+                        <li>P(A') = 1 − P(A)</li>
+                        <li>P(A ∩ B) = Both / Total</li>
+                        <li>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</li>
+                        <li>Independent Events: P(A ∩ B) = P(A) × P(B)</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 6. STATISTICAL ANALYSIS -->
+    <section class="panel">
+
+        <h2>6. Order Value Distribution & Statistics</h2>
+
+        <p class="note">
+            This section shows how order values are distributed and summarizes
+            the dataset using descriptive statistics.
+        </p>
+
+        <div class="analysis-layout">
+
+            <!-- DISTRIBUTION -->
+            <div class="chart-box">
+
+                <h3>Order Value Distribution</h3>
+
+                <p class="analysis-description">
+                    The chart groups orders into value ranges.
+                    It shows how frequently different order values occur.
+                </p>
+
+                <div class="chart-wrap">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="statistics-panel">
+
+                <h3>Descriptive Statistics</h3>
+
+                <div class="analysis-stats">
+
+                    <div>
+                        <span>Mean</span>
+                        <strong id="mean">$0</strong>
+                        <small>Average order value.</small>
+                    </div>
+
+                    <div>
+                        <span>Median</span>
+                        <strong id="median">$0</strong>
+                        <small>Middle order value.</small>
+                    </div>
+
+                    <div>
+                        <span>Minimum</span>
+                        <strong id="minimum">$0</strong>
+                        <small>Smallest order value.</small>
+                    </div>
+
+                    <div>
+                        <span>Maximum</span>
+                        <strong id="maximum">$0</strong>
+                        <small>Largest order value.</small>
+                    </div>
+
+                    <div>
+                        <span>Range</span>
+                        <strong id="range">$0</strong>
+                        <small>Maximum − Minimum.</small>
+                    </div>
+
+                    <div>
+                        <span>Standard Deviation</span>
+                        <strong id="deviation">$0</strong>
+                        <small>Order value variation around the mean.</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="statistics-interpretation">
+
+            <h3>How to Read the Results</h3>
+
+            <div class="interpretation-grid">
+
+                <div>
+                    <strong>Mean</strong>
+                    <p>
+                        Shows the average value of all orders.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>Median</strong>
+                    <p>
+                        Shows the middle value after all orders are sorted.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>Range</strong>
+                    <p>
+                        Shows the difference between the largest and smallest order.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>Standard Deviation</strong>
+                    <p>
+                        Shows how much order values vary around the mean.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="statistics-connection">
+
+            <h3>Connection to Probability Theory</h3>
+
+            <p>
+                The distribution of order values helps us understand how frequently
+                different order values occur. Statistical measures summarize this
+                distribution and provide a basis for analyzing real-world data.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- 7. CHARTS -->
+    <section class="panel">
+
+        <h2>7. Charts</h2>
+
+        <div class="charts-grid">
+
+            <div class="chart-box wide">
+
+                <h3>Monthly Revenue</h3>
+
+                <div class="chart-wrap">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+
+            </div>
+
+
+            <div class="chart-box">
+
+                <h3>Orders by Category</h3>
+
+                <div class="chart-wrap">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+
+            </div>
+
+
+            <div class="chart-box">
+
+                <h3>Category Probabilities</h3>
+
+                <div class="chart-wrap">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 8. ALGORITHM -->
+    <section class="panel">
+
+        <h2>8. Calculation Algorithm</h2>
+
+        <ol class="algorithm">
+
+            <li>Read input data.</li>
+            <li>Validate the data.</li>
+            <li>Calculate exclusive categories.</li>
+            <li>Calculate shopping statistics.</li>
+            <li>Calculate probabilities.</li>
+            <li>Calculate the intersection.</li>
+            <li>Check independence.</li>
+            <li>Apply the addition rule.</li>
+            <li>Calculate statistical measures.</li>
+            <li>Update charts and visualizations.</li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- CONCLUSION -->
+    <section class="panel conclusion-card">
+
+        <h2>Conclusion</h2>
+
+        <p>
+            The shopping data demonstrates how probability theory can be applied
+            to real-world online shopping data. The website calculates basic
+            probability, complement probability, intersection, independence,
+            and the addition rule using interactive data.
+        </p>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

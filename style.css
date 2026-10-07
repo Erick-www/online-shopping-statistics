@@ -1,0 +1,684 @@
+:root {
+    --blue: #2563eb;
+    --orange: #d97706;
+    --purple: #7c3aed;
+    --gray: #9ca3af;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --bg: #f3f4f6;
+    --soft: #f9fafb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+header {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+}
+
+header p {
+    margin: 0;
+    color: var(--muted);
+}
+
+main {
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 20px;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.panel h2 {
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    font-size: 22px;
+    border-bottom: 2px solid var(--line);
+}
+
+h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+
+/* ---------- Inputs ---------- */
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #fff;
+    color: var(--ink);
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 1px;
+}
+
+.validation {
+    margin-top: 18px;
+    padding: 12px 16px;
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-left: 4px solid #dc2626;
+    border-radius: 8px;
+    color: #991b1b;
+    font-size: 14px;
+}
+
+.validation ul {
+    margin: 6px 0;
+    padding-left: 20px;
+}
+
+
+/* ---------- Grids and Cards ---------- */
+
+.formula-grid,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.probability-grid,
+.two-col,
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.two-col {
+    margin-top: 20px;
+    align-items: start;
+}
+
+.formula-card,
+.stat-card,
+.probability-card,
+.chart-box {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.stat-card span,
+.analysis-stats span {
+    display: block;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.stat-card strong {
+    font-size: 24px;
+}
+
+.stat-card small,
+.analysis-stats small {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.e-card {
+    border-top: 4px solid var(--blue);
+}
+
+.c-card {
+    border-top: 4px solid var(--orange);
+}
+
+.b-card {
+    border-top: 4px solid var(--purple);
+}
+
+.o-card {
+    border-top: 4px solid var(--gray);
+}
+
+.formula-card strong {
+    font-size: 22px;
+}
+
+
+/* ---------- Formulas ---------- */
+
+.formula {
+    margin: 0 0 10px;
+    padding: 8px 12px;
+    background: #eff6ff;
+    border-left: 4px solid var(--blue);
+    border-radius: 6px;
+    font-family: "Cambria Math", Cambria, "Times New Roman", serif;
+    font-size: 15px;
+}
+
+.calc {
+    margin: 8px 0;
+    color: #374151;
+    font-size: 14px;
+    white-space: pre-line;
+    min-height: 22px;
+}
+
+.note {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.panel > .note:last-child,
+.probability-card > .note {
+    margin: 12px 0 0;
+}
+
+.check {
+    margin: 16px 0 0;
+    padding: 10px 14px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    color: #065f46;
+    font-weight: 600;
+}
+
+
+/* ---------- Probability ---------- */
+
+.flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.flow span {
+    padding: 6px 14px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.flow b {
+    color: var(--muted);
+}
+
+.probability-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-size: 14px;
+}
+
+.explain {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.probability-card select {
+    margin-bottom: 4px;
+}
+
+.probability-card > strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 28px;
+}
+
+.probability-card > small {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* ---------- Independent Events ---------- */
+
+.compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 10px 0;
+}
+
+.compare span {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.compare strong {
+    display: block;
+    font-size: 24px;
+}
+
+.bar {
+    height: 10px;
+    margin-top: 6px;
+    background: var(--line);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--blue);
+}
+
+#barActual {
+    background: var(--purple);
+}
+
+.conclusion {
+    margin: 10px 0 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.conclusion.ok {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.conclusion.bad {
+    background: #fff7ed;
+    color: #9a3412;
+    border: 1px solid #fed7aa;
+}
+
+
+/* ---------- Venn Diagram ---------- */
+
+#venn {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.v-universe {
+    fill: #fff;
+    stroke: #d1d5db;
+    stroke-width: 1.5;
+}
+
+.v-e {
+    fill: var(--blue);
+    fill-opacity: 0.3;
+    stroke: var(--blue);
+    stroke-width: 2;
+}
+
+.v-c {
+    fill: var(--orange);
+    fill-opacity: 0.3;
+    stroke: var(--orange);
+    stroke-width: 2;
+}
+
+.v-both {
+    fill: var(--purple);
+    fill-opacity: 0.45;
+}
+
+#venn text {
+    text-anchor: middle;
+    fill: var(--ink);
+}
+
+#venn .v-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#venn .v-num {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+#venn .v-small {
+    font-size: 12px;
+    fill: var(--muted);
+}
+
+#venn .v-other {
+    text-anchor: start;
+    font-size: 13px;
+}
+
+
+/* ---------- Legend and Summary ---------- */
+
+.legend {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+}
+
+.legend li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+}
+
+.summary {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary td {
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--line);
+}
+
+.summary td:last-child {
+    text-align: right;
+    font-weight: 700;
+}
+
+.summary tr.sep td {
+    border-top: 2px solid #d1d5db;
+}
+
+.key-formulas {
+    margin-top: 20px;
+}
+
+.key-formulas ul {
+    margin: 0;
+    padding-left: 20px;
+    font-family: "Cambria Math", Cambria, "Times New Roman", serif;
+}
+
+.key-formulas li {
+    margin-bottom: 4px;
+}
+
+
+/* ---------- Statistics ---------- */
+
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.analysis-layout .chart-box {
+    min-height: 360px;
+}
+
+.analysis-description {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 14px;
+}
+
+.statistics-panel {
+    background: #fff;
+}
+
+.statistics-panel h3 {
+    margin-bottom: 14px;
+}
+
+.analysis-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.analysis-stats div {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.analysis-stats strong {
+    display: block;
+    font-size: 21px;
+}
+
+.analysis-stats small {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+/* ---------- Statistics Interpretation ---------- */
+
+.statistics-interpretation {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.interpretation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.interpretation-grid div {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.interpretation-grid strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.interpretation-grid p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.statistics-connection {
+    margin-top: 20px;
+    padding: 16px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+}
+
+.statistics-connection p {
+    margin: 0;
+    color: #374151;
+    font-size: 14px;
+}
+
+
+/* ---------- Charts ---------- */
+
+.charts-grid {
+    gap: 24px;
+}
+
+.chart-box.wide {
+    grid-column: 1 / -1;
+}
+
+.chart-wrap {
+    position: relative;
+    height: 280px;
+}
+
+
+/* ---------- Algorithm ---------- */
+
+.algorithm {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    counter-reset: step;
+}
+
+.algorithm li {
+    counter-increment: step;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.algorithm li::before {
+    content: counter(step);
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.conclusion-card p {
+    margin: 0;
+    max-width: 80ch;
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+
+    .input-grid,
+    .formula-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .probability-grid,
+    .two-col,
+    .analysis-layout,
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .interpretation-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 0 10px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .input-grid,
+    .formula-grid,
+    .stats-grid,
+    .analysis-stats,
+    .algorithm,
+    .compare,
+    .interpretation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-wrap {
+        height: 240px;
+    }
+}
